@@ -9,26 +9,39 @@ require(__dirname + '/routes')(app);
 
 //	socket.io configuration
 io.configure(function() {
+	io.enable('browser client minification');
 	io.enable('browser client etag');
+	io.enable('browser client gzip');
 	io.set('log level', 1);
-
-	io.set('transports', ['websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
+	io.set('transports', ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 });
 //	on socket client connect
 io.sockets.on('connection', function(socket) {
 	//	start monitoring
-	mon.start(100);
+	mon.start(500);
 
 	mon.on('cpu', function(cpu) {
-		socket.emit('mon_cpu', cpu);
+		if (cpu) {
+			cpu = {
+				timestamp: Date(),
+				cpus: cpu
+			};
+			socket.emit('mon_cpu', cpu);
+		}
 	});
 
 	mon.on('memory', function(mem) {
-		socket.emit('mon_mem', mem);
+		if (mem) {
+			mem['timestamp'] = Date();
+			socket.emit('mon_mem', mem);
+		}
 	});
 
 	mon.on('proc', function(proc) {
-		socket.emit('mon_proc', proc);
+		if (proc) {
+			proc['timestamp'] = Date();
+			socket.emit('mon_proc', proc);
+		}
 	});
 });
 

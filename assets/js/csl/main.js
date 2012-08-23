@@ -1,9 +1,6 @@
 	var page = {
-		cache: {
-			stats: {
-				cpu: [],
-				memory: [],
-				proc: []
-			}
+		latency: {
+			current: 0,
+			avg: 0
 		}
 	};
