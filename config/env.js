@@ -7,7 +7,7 @@ module.exports = function (express, app) {
         app.use(express.compiler({
             enable: ['less'],
             src: __dirname + '/../src/',
-            dest: __dirname + '/../build/'
+            dest: __dirname + '/../out/'
         }));
         app.use(app.router);
         app.use(express.static(__dirname + '/../build'));
