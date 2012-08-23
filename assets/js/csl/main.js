@@ -1,9 +1,9 @@
 	var page = {
 		cache: {
 			stats: {
-				cpu: [{}],
-				memory: [{}],
-				proc: [{}]
+				cpu: [],
+				memory: [],
+				proc: []
 			}
 		}
 	};

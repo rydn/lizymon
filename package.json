@@ -1,16 +1,19 @@
 {
   "name": "lizymon",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.0.3",
+  "private": false,
   "dependencies": {
     "express": "2.5.11",
     "jqtpl": ">= 0.0.1",
     "less": ">= 0.0.1",
     "optimist": ">= 0.0.1"
   },
-  "description": "ERROR: No README.md file found!",
+  "description": "System monitor and controller powered by NodeJs, Socket.io, Express and friends",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+	"recess":"*",
+	"uglify-js":"*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

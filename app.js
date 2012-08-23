@@ -7,6 +7,13 @@ var express = require('express'),
 require(__dirname + '/config/env.js')(express, app);
 require(__dirname + '/routes')(app);
 
+//	socket.io configuration
+io.configure(function() {
+	io.enable('browser client etag');
+	io.set('log level', 1);
+
+	io.set('transports', ['websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
+});
 //	on socket client connect
 io.sockets.on('connection', function(socket) {
 	//	start monitoring
