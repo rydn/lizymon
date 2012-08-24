@@ -17,7 +17,7 @@ HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\
 #								BUILD DEFS 									#
 #############################################################################
 
-build: _ui_header bootstrap csl styles _ui_footer
+build: _ui_header bootstrap csl styles templates mustache _ui_footer
 build-light: _ui_header csl styles _ui_footer
 build-all: _ui_header bootstrap jquery csl styles _ui_footer
 	
@@ -98,6 +98,25 @@ _styles_clean_uncompressed:
 _styles_complete:
 	@echo "Stylesheets and LESS				${CHECK}"
 
+#								TEMPLATES 										#
+#############################################################################
+templates: _templates_compile  _templates_complete
+#############################################################################
+#############################################################################
+_templates_compile:
+	@cp ${ASSETS}/templates/*.mu.html ${OUT}/templates/
+_templates_complete:
+	@echo "Mustache Templates				${CHECK}"
+
+#								Mustache									#
+#############################################################################
+mustache: _mustache_compile  _mustache_complete
+#############################################################################
+#############################################################################
+_mustache_compile:
+	@uglifyjs -c -nc --lift-vars  ${ASSETS}/js/mustache/mustache.js > ${OUT}/js/mustache.min.js
+_mustache_complete:
+	@echo "Mustache Rendering Engine			${CHECK}"
 #############################################################################
 .PHONY: build
 #############################################################################

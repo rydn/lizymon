@@ -22,8 +22,9 @@ io.sockets.on('connection', function(socket) {
 
 	mon.on('cpu', function(cpu) {
 		if (cpu) {
+			var date = new Date();
 			cpu = {
-				timestamp: Date(),
+				timestamp: date.getTime(),
 				cpus: cpu
 			};
 			socket.emit('mon_cpu', cpu);
@@ -32,14 +33,16 @@ io.sockets.on('connection', function(socket) {
 
 	mon.on('memory', function(mem) {
 		if (mem) {
-			mem['timestamp'] = Date();
+			var date = new Date();
+			mem['timestamp'] = date.getTime();
 			socket.emit('mon_mem', mem);
 		}
 	});
 
 	mon.on('proc', function(proc) {
 		if (proc) {
-			proc['timestamp'] = Date();
+			var date = new Date();
+			proc['timestamp'] = date.getTime();
 			socket.emit('mon_proc', proc);
 		}
 	});
