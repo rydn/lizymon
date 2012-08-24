@@ -8,38 +8,36 @@
 				if (current) {
 					page.latency.current = current;
 					page.latency.count++;
-					page.latency.total += page.latency.current;
+					page.latency.total = page.latency.total + page.latency.current;
 					page.latency.avg = Math.floor((page.latency.count / page.latency.total) * 100);
-					page.latency.getTemplate(function(err, template) {
-						if (err) {
-							console.log(err);
-							return false;
+					page.latency.getTemplate(function(templateToRen) {
+						if (!templateToRen) {
+							return;
 						} else {
-							var html = page.render(template, {
+							var html = page.render(templateToRen, {
 								current: page.latency.current,
 								avg: page.latency.avg
 							});
 							$('.latency').html(html);
-							return true;
+							return;
 						}
 					});
-
 				} else {
-					return false;
+					return;
 				}
 			},
-			getTemplate: function(callback) {
+			getTemplate: function(cb) {
 				if (!page.latency.template) {
 					$.get('/templates/latency.mu.html', function(template) {
 						if (template) {
-							callback(null, template);
 							page.latency.template = template;
+							cb(template);
 						} else {
-							callback('no template returned', null);
+							cb(null);
 						}
 					});
 				} else {
-					callback(null, page.latency.template);
+					cb(null);
 				}
 			},
 			template: null

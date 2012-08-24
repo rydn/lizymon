@@ -18,7 +18,7 @@ io.configure(function() {
 //	on socket client connect
 io.sockets.on('connection', function(socket) {
 	//	start monitoring
-	mon.start(500);
+	mon.start(850);
 
 	mon.on('cpu', function(cpu) {
 		if (cpu) {

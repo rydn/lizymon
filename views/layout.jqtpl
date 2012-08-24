@@ -38,7 +38,7 @@
         <div class="span4 log">
             <h4>CPU Usage</h4>
             <div class="progress gauge_proc">
-                <div class="bar gauge_proc_percentage bar-warning">
+                <div class="bar gauge_proc_percentage bar-warning" style="width: 10%; font-size:10px">
                 </div>
             </div>
         </div>
